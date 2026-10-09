@@ -2,6 +2,7 @@
 passlib[bcrypt]
 pymongo
 python-dotenv
+ipykernel
 
 # backend
 fastapi
@@ -12,6 +13,7 @@ python-multipart
 # observability
 logfire
 logfire[fastapi]
+logfire[system-metrics]
 
 # ai stuff
 nest-asyncio
