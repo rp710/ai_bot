@@ -20,7 +20,7 @@ export async function renderProductDetail(id) {
       <button class="back-btn" id="backBtn">← Back to Products</button>
       <div class="product-detail-grid">
         <div class="product-detail-image">
-          <img src="${product.image || 'https://via.placeholder.com/500x500?text=Product+Image'}" alt="${product.name}" />
+          <img src="${product.image || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80'}" alt="${product.name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80';" />
         </div>
         <div class="product-detail-info">
           <span class="product-detail-category">${product.category}</span>

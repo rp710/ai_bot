@@ -45,7 +45,7 @@ export async function renderHome() {
             <div class="product-card" data-id="${p.id}">
               <div class="product-image">
                 ${p.image
-                  ? `<img src="${p.image}" alt="${p.name}" loading="lazy" />`
+                  ? `<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80';" />`
                   : `<span class="product-placeholder">Product Image</span>`}
               </div>
               <div class="product-info">

@@ -9,9 +9,9 @@ How it works:
 """
 from pydantic_ai import RunContext
 from fastapi import APIRouter,Body
-from backend.database import products_collection
-from pydantic_ai import Agent,Tool,AgentMessage,HumanMessage
-from pydantic_ai import BaseModel
+from Backend.database import products_collection
+from pydantic_ai import Agent,Tool
+from pydantic import BaseModel
 from typing import List,Optional,Dict,Any
 from dotenv import load_dotenv
 
@@ -85,15 +85,30 @@ def search_products(
         query["price"] = price_filter   
     
 
+    from .products import resolve_product_image
+
     raw_results = products_collection.find(query).limit(8)
     products = list(raw_results)
 
     processed = []
     for p in products:
         p["id"] = str(p["_id"])
-        p.pop("_id",None)
-        p.pop("image_data",None)
-        p.pop("image_content_type",None)
+        p.pop("_id", None)
+        img = p.get("image")
+        if img and isinstance(img, str):
+            if "loremflickr.com" in img or "placeholder.com" in img:
+                p["image"] = resolve_product_image(p.get("name", ""), p.get("category", "men"), hash(p.get("name", "")) % 10)
+            elif img.startswith("http"):
+                pass
+            elif "image_data" in p and "image_content_type" in p:
+                p["image"] = f"data:{p['image_content_type']};base64,{p['image_data']}"
+        elif "image_data" in p and "image_content_type" in p:
+            p["image"] = f"data:{p['image_content_type']};base64,{p['image_data']}"
+        else:
+            p["image"] = resolve_product_image(p.get("name", ""), p.get("category", "men"), hash(p.get("name", "")) % 10)
+
+        p.pop("image_data", None)
+        p.pop("image_content_type", None)
         processed.append(p)
         
     ctx.deps.found_products = processed
@@ -103,6 +118,7 @@ def search_products(
     return f"OK. I found {len(processed)} products. I will show them now."
 
 @router.post("")
+@router.post("/")
 async def chatbot(
     data:Dict = Body(...)
 ):

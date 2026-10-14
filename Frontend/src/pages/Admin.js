@@ -73,7 +73,7 @@ export async function renderAdmin() {
       <div class="product-list-grid">
         ${state.productList.map(p => `
           <div class="product-list-item">
-            <img src="${p.image}" alt="${p.name}" />
+            <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80';" />
             <h3>${p.name}</h3>
             <p>${p.description}</p>
             <p class="price">₹${p.price}</p>
@@ -125,7 +125,7 @@ function setupAdminEvents() {
     btn.disabled = true;
     try {
       await bulkGenerateProducts();
-      alert('500 Products Generated Successfully! Images may take a moment to load from LoremFlickr.');
+      alert('500 Products Generated Successfully with High-Quality Fashion Images!');
       renderAdmin();
     } catch(e) {
       alert('Failed to generate products.');

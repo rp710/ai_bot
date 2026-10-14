@@ -25,7 +25,7 @@ export async function renderCart() {
       return {
         ...item,
         price: match.price || 0,
-        image: match.image || 'https://via.placeholder.com/100x100?text=Item',
+        image: match.image || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=80',
         description: match.description || 'No description available',
       };
     });
@@ -53,7 +53,7 @@ export async function renderCart() {
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
           ${cartItems.map(item => `
             <div style="display: flex; gap: 1rem; align-items: center; border-bottom: 1px solid #E5E7EB; padding-bottom: 1.5rem;">
-              <img src="${item.image}" alt="${item.product_name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 0.5rem;" />
+              <img src="${item.image}" alt="${item.product_name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=80';" style="width: 80px; height: 80px; object-fit: cover; border-radius: 0.5rem;" />
               <div style="flex: 1;">
                 <h3 style="font-weight: bold; font-size: 1.1rem; color: #111827;">${item.product_name}</h3>
                 <p style="color: #6B7280; font-size: 0.9rem;">Qty: ${item.quantity}</p>

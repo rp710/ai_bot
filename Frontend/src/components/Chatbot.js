@@ -32,7 +32,7 @@ export function renderChatbot() {
               <div class="message-products">
                 ${msg.data.map(p => `
                 <div class="product-recommendation" data-id="${p.id}">
-                  <img src="${p.image}" alt="${p.name}" />
+                  <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80';" />
                   <p>${p.name}</p>
                   <p class="price">₹${p.price}</p>
                 </div>

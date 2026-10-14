@@ -26,6 +26,14 @@ def get_cart(user_email: str):
     items = list(carts_collection.find({"user_email": user_email}))
     return items
 
+@router.delete("/{user_email}")
+def clear_cart(user_email: str):
+    """
+    Clearing user's entire shopping cart
+    """
+    carts_collection.delete_many({"user_email": user_email})
+    return {"message": "Cart cleared successfully"}
+
 @router.delete("/{user_email}/{product_name}")
 def remove_from_cart(user_email: str,product_name:str):
     """

@@ -5,7 +5,7 @@ from ..database import orders_collection
 
 router = APIRouter(prefix="/orders",tags=["Orders"])
 
-@router.post("")
+@router.post("/")
 def place_order(order:Order):
     """
     placing order for user
