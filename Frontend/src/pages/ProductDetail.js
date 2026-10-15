@@ -1,6 +1,6 @@
 import { state } from '../services/state.js';
 import { fetchProducts, addToCart, placeOrder } from '../services/api_v2.js';
-import { renderHeader } from '../components/Header.js';
+import { renderHeader, setupHeaderEvents } from '../components/Header.js';
 
 export async function renderProductDetail(id) {
   const data = await fetchProducts();
@@ -11,6 +11,7 @@ export async function renderProductDetail(id) {
       ${renderHeader()}
       <div class="loading">Loading...</div>
     `;
+    setupHeaderEvents();
     return;
   }
   
@@ -51,6 +52,8 @@ export async function renderProductDetail(id) {
       </div>
     </div>
   `;
+
+  setupHeaderEvents();
   
   document.getElementById('backBtn')?.addEventListener('click', () => {
     window.history.back();
@@ -68,9 +71,17 @@ export async function renderProductDetail(id) {
       setTimeout(() => {
         e.target.textContent = 'Add to Cart';
         e.target.disabled = false;
-        // Optionally update header to reflect new cart count
-        const app = document.getElementById('app');
-        if(app) renderProductDetail(id);
+        const cartBtn = document.getElementById('cartBtn');
+        if (cartBtn) {
+          cartBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            ${state.cartItemCount > 0 ? `<span class="cart-badge">${state.cartItemCount}</span>` : ''}
+          `;
+        }
       }, 1500);
     } catch (err) {
       console.error(err);

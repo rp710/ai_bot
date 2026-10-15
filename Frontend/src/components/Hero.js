@@ -9,8 +9,8 @@ export function renderHero() {
         <h1 class="hero-title">Elevate Your Style with Premium Fashion</h1>
         <p class="hero-desc">Discover our curated collection of timeless pieces that blend sophistication with modern design.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary">Shop Now</button>
-          <button class="btn btn-outline">View Catalog</button>
+          <button class="btn btn-primary" onclick="document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' })">Shop Now</button>
+          <button class="btn btn-outline" onclick="document.querySelector('.products-section')?.scrollIntoView({ behavior: 'smooth' })">View Catalog</button>
         </div>
         <div class="hero-stats">
           <div class="hero-stat">

@@ -5,7 +5,17 @@ import os
 import uvicorn
 import logfire
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 logfire.configure(send_to_logfire="if-token-present")
 logfire.instrument_fastapi(app)

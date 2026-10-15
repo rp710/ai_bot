@@ -61,6 +61,27 @@ We created a simple switch to turn on the whole mall at once:
 
 ---
 
+## 📱 Mobile & Android Device Access
+
+The web app and AI Chatbot are 100% mobile-responsive and optimized for Android devices:
+
+1. **Connect to the Same Wi-Fi**:
+   - Ensure your Android phone is connected to the same Wi-Fi network as your computer.
+2. **Find Your PC's Local IP**:
+   - Run `ipconfig` in PowerShell/CMD (look for your Wi-Fi IPv4 address, e.g. `192.168.86.85`).
+3. **Open on Android Browser**:
+   - Open Chrome, Brave, or Firefox on your Android phone and navigate to:
+     ```
+     http://<your-pc-ip>:8000
+     ```
+     *(Example: `http://192.168.86.85:8000`)*
+4. **Testing in Android Emulator**:
+   - Use `http://10.0.2.2:8000` from inside the Android Emulator browser.
+5. **(Optional) Add to Home Screen (PWA Style)**:
+   - In Android Chrome, tap `⋮` (Menu) -> **"Add to Home screen"** or **"Install app"** for a full-screen app-like experience!
+
+---
+
 ## 🏗️ Manual Tool Setup
 
 If you prefer turning things on one by one:

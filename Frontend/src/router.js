@@ -11,6 +11,14 @@ export function router() {
   const hash = window.location.hash || '#/';
   const path = hash.slice(1);
   
+  // Close mobile drawer on route change
+  if (typeof window.closeMobileDrawer === 'function') {
+    window.closeMobileDrawer();
+  }
+
+  // Scroll to top on page navigation
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
   if (path === '/add-products' || path === '/admin') {
     renderAdmin();
   } else if (path === '/cart') {

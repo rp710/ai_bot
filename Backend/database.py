@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=os.path.join(os.getcwd(), '.env'))
 
-MONGODB_URI = os.getenv("MONGODB_URI")
+MONGODB_URI = os.getenv("MONGODB_URI") or os.getenv("MONGO_URI")
 
 client = MongoClient(MONGODB_URI)
 

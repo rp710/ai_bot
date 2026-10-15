@@ -1,5 +1,5 @@
-// Use relative paths since the frontend is served directly by the backend!
-export const API_BASE = ""; 
+// Use relative paths by default when served together, or dynamic window.__API_BASE__ for remote/mobile testing
+export const API_BASE = (typeof window !== 'undefined' && window.__API_BASE__) || ""; 
 
 /**
  * Fetch products, optionally filtering by category and/or price range.

@@ -1,6 +1,6 @@
 import { state, resetAdminForm } from '../services/state.js';
 import { fetchProducts, addProduct, updateProduct, deleteProduct, deleteAllProducts, bulkGenerateProducts } from '../services/api_v2.js';
-import { renderHeader } from '../components/Header.js';
+import { renderHeader, setupHeaderEvents } from '../components/Header.js';
 
 /**
  * Render the Admin dashboard page to manage products.
@@ -11,10 +11,10 @@ export async function renderAdmin() {
   
   document.getElementById('app').innerHTML = `
     ${renderHeader()}
-    <div class="admin-page">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="admin-page container">
+      <div class="admin-header-row">
         <h1 class="admin-title">Add / Manage Products</h1>
-        <div style="display: flex; gap: 0.5rem;">
+        <div class="admin-top-actions">
           <button id="deleteAllBtn" class="btn btn-danger" style="background: #ef4444; color: white; font-weight: bold;">🧨 Delete All Products</button>
           <button id="bulkGenBtn" class="btn btn-warning" style="background: #eab308; color: black; font-weight: bold;">⚡ Generate 500 Demo Products</button>
         </div>
@@ -93,6 +93,7 @@ export async function renderAdmin() {
 }
 
 function setupAdminEvents() {
+  setupHeaderEvents();
   document.querySelectorAll('[data-cat]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.adminForm.category = btn.dataset.cat;
